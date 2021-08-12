@@ -13,7 +13,7 @@ function App() {
 	const handleInput = async (ev: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = ev.target
 
-		const fullRegex = /^https?:\/\/discohook.org\/\?data=[A-z0-9\_\-]+$/
+		const fullRegex = /^https?:\/\/discohook.(org|app)\/\?data=[A-z0-9\_\-]+$/
 
 		if (fullRegex.test(value)) setUrl(value)
 		else setUrl("")
