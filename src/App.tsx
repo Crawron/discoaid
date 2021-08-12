@@ -48,6 +48,10 @@ function App() {
 				<a className={linkStyle} href="https://discohook.org/discord">
 					Support Server
 				</a>
+				. Source code for this site is on{" "}
+				<a className={linkStyle} href="https://github.com/Crawron/discoaid">
+					GitHub
+				</a>
 				.
 			</p>
 			<label className="w-full">
