@@ -1,4 +1,4 @@
-# Discoaid
+# [Discoaid](https://discoaid.netlify.app/)
 
 There is an issue with Discohook that causes some links to lead to a 520 error page.
 
