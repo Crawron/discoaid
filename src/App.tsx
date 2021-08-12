@@ -62,7 +62,7 @@ function App() {
 					type="text"
 					name="url"
 					placeholder="https://discohook.org/?data=..."
-					className="w-full h-9 px-2 rounded border-black bg-coolGray-900 placeholder-coolGray-500 placeholder-shown:italic focus:ring-2 ring-blue-500"
+					className="w-full h-9 px-2 rounded border-black bg-coolGray-900 transition placeholder-coolGray-500 placeholder-shown:italic focus:ring-2 ring-blue-500"
 					onChange={handleInput}
 				/>
 			</label>
