@@ -102,7 +102,7 @@ function App() {
 					<p className="w-full">
 						It should start with either{" "}
 						<code className={codeStyle}>https://discohook.org/</code> or{" "}
-						<code className={codeStyle}>https://discohook.app</code>
+						<code className={codeStyle}>https://discohook.app/</code>
 					</p>
 				</>
 			)}
