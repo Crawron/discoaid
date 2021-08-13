@@ -60,11 +60,12 @@ function App() {
 	}
 
 	function cleanMessage(m: DiscohookData["messages"][number]["data"]) {
-		return (m.embeds = m.embeds?.map((e) => {
+		m.embeds = m.embeds?.map((e) => {
 			if (e.image) e.image = { url: e.image.url }
 			if (e.thumbnail) e.thumbnail = { url: e.thumbnail.url }
 			return e
-		}))
+		})
+		return m
 	}
 
 	return (
