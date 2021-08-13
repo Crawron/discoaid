@@ -1,3 +1,4 @@
+/* https://github.com/discohook/site/blob/main/common/base64/base64Decode.ts */
 export const base64Decode = (urlSafeBase64: string) => {
 	const base64 = urlSafeBase64.replace(/-/g, "+").replace(/_/g, "/")
 	try {
