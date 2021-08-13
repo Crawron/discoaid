@@ -41,7 +41,7 @@ function App() {
 	}
 
 	return (
-		<div className="w-full max-w-2xl mx-auto flex flex-col items-center gap-4 text-coolGray-300 py-16 px-6">
+		<div className="w-full max-w-3xl mx-auto flex flex-col items-center gap-4 text-coolGray-300 py-16 px-6">
 			<h1 className="font-bold text-3xl text-center flex gap-4 items-center">
 				Discoaid
 			</h1>
