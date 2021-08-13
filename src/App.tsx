@@ -3,7 +3,26 @@ import { base64Decode } from "./base64Decode"
 
 type Json = string | number | boolean | null | Json[] | { [key: string]: Json }
 
-type DiscohookData = { messages: { data: Record<string, Json> }[] }
+type DiscohookData = {
+	messages: {
+		data: Record<string, Json> & {
+			embeds?: {
+				thumbnail?: {
+					url: string
+					proxy_url?: string
+					width?: string
+					height?: string
+				}
+				image?: {
+					url: string
+					proxy_url?: string
+					width?: string
+					height?: string
+				}
+			}[]
+		}
+	}[]
+}
 
 const linkStyle =
 	"underline text-blue-400 hover:text-blue-200 transition-colors"
@@ -38,6 +57,14 @@ function App() {
 		try {
 			return JSON.parse(base64Decode(data))
 		} catch {}
+	}
+
+	function cleanMessage(m: DiscohookData["messages"][number]["data"]) {
+		return (m.embeds = m.embeds?.map((e) => {
+			if (e.image) e.image = { url: e.image.url }
+			if (e.thumbnail) e.thumbnail = { url: e.thumbnail.url }
+			return e
+		}))
 	}
 
 	return (
@@ -86,7 +113,7 @@ function App() {
 					<textarea
 						key={i}
 						className="w-full h-96 p-4 rounded border-black bg-coolGray-900 font-mono"
-						value={JSON.stringify(m, null, 2)}
+						value={JSON.stringify(cleanMessage(m), null, 2)}
 						readOnly
 					/>
 				)) ?? (
