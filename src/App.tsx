@@ -7,16 +7,30 @@ type DiscohookData = { messages: { data: Record<string, Json> }[] }
 
 const linkStyle =
 	"underline text-blue-400 hover:text-blue-200 transition-colors"
+
+const codeStyle = "bg-coolGray-900 p-1 rounded"
+
 function App() {
 	const [url, setUrl] = useState("")
+	const [shareLink, setShareLink] = useState(false)
 
 	const handleInput = async (ev: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = ev.target
 
 		const fullRegex = /^https?:\/\/discohook.(org|app)\/\?data=[A-z0-9\_\-]+$/
+		const shareRegex =
+			/^https?:\/\/share.discohook.(org|app)\/go\/[A-z0-9\_\-]+$/
 
-		if (fullRegex.test(value)) setUrl(value)
-		else setUrl("")
+		if (fullRegex.test(value)) {
+			setUrl(value)
+			setShareLink(false)
+		} else if (shareRegex.test(value)) {
+			setUrl("")
+			setShareLink(true)
+		} else {
+			setUrl("")
+			setShareLink(false)
+		}
 	}
 
 	function decodeB64(url: string): DiscohookData | undefined {
@@ -78,6 +92,20 @@ function App() {
 				)) ?? (
 					<p className="w-full text-red-500 font-semibold">Failed decoding</p>
 				))}
+
+			{shareLink && (
+				<>
+					<p className="w-full">
+						This is a shortened url, visit it and wait for it to redirect you.
+						Then copy the long URL it leads to and paste it above.
+					</p>
+					<p className="w-full">
+						It should start with either{" "}
+						<code className={codeStyle}>https://discohook.org/</code> or{" "}
+						<code className={codeStyle}>https://discohook.app</code>
+					</p>
+				</>
+			)}
 		</div>
 	)
 }
