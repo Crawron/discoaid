@@ -19,7 +19,9 @@ type DiscohookData = {
 					width?: string
 					height?: string
 				}
+				timestamp?: string
 			}[]
+			files?: Json
 		}
 	}[]
 }
@@ -63,9 +65,13 @@ function App() {
 		m.embeds = m.embeds?.map((e) => {
 			if (e.image) e.image = { url: e.image.url }
 			if (e.thumbnail) e.thumbnail = { url: e.thumbnail.url }
+			if (e.timestamp) e.timestamp = new Date(e.timestamp).toISOString()
 			return e
 		})
-		return m
+
+		const { files, ...message } = m
+
+		return message
 	}
 
 	return (
