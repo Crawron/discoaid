@@ -84,8 +84,9 @@ function App() {
 				error page.
 			</p>
 			<p className="w-full">
-				You can give an editor link on the text box below to get its JSON data,
-				separated by message. Paste this data in the <b>JSON Data Editor</b> on{" "}
+				You can paste this error page's link on the text box below to get the
+				data it contains, separated by message. Paste this data in the{" "}
+				<b>JSON Data Editor</b> on{" "}
 				<a className={linkStyle} href="https://discohook.org/">
 					Discohook
 				</a>
