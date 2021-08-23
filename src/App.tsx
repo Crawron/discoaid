@@ -125,7 +125,14 @@ function App() {
 						readOnly
 					/>
 				)) ?? (
-					<p className="w-full text-red-500 font-semibold">Failed decoding</p>
+					<p>
+						<span className="w-full text-red-500 font-semibold">
+							Failed decoding
+						</span>
+						. Make sure you have copied <i>the entire link</i>. Use Right Click
+						(or hold on mobile) on the address bar of the 520 error page and
+						"Select All", then copy.
+					</p>
 				))}
 
 			{shareLink && (
