@@ -31,16 +31,11 @@ const linkStyle =
 
 const codeStyle = "bg-coolGray-900 p-1 rounded"
 
-const shareUrlCache = {}  // try to prevent excessive identical requests to the proxy
-
 function App() {
 	const [url, setUrl] = useState("")
 	const [shareLink, setShareLink] = useState(false)
 
-	const getOriginalUrl = async (url: string): string => {
-		if (shareUrlCache[url]) {
-			return shareUrlCache[url]
-		}
+	const getOriginalUrl = async (url: string) => {
 		// the location header isn't exposed to the fetch API so we just "proxy" getting it here
 		const response = await fetch('https://discoshorter-proxy-api.shay.cat/get-share-redirect', {
 			method: "POST",
@@ -51,9 +46,6 @@ function App() {
 			return ""
 		}
 		const data = await response.json()
-		if (data.url) {
-			shareUrlCache[url] = data.url
-		}
 		return data.url || ""
 	}
 
