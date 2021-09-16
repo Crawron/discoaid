@@ -37,11 +37,14 @@ function App() {
 
 	const getOriginalUrl = async (url: string) => {
 		// the location header isn't exposed to the fetch API so we just "proxy" getting it here
-		const response = await fetch('https://discoshorter-proxy-api.shay.cat/get-share-redirect', {
-			method: "POST",
-			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify({ url: url })
-		})
+		const response = await fetch(
+			"https://discoshorter-proxy-api.shay.cat/get-share-redirect",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ url: url }),
+			}
+		)
 		if (!response.ok) {
 			return ""
 		}
@@ -127,6 +130,7 @@ function App() {
 					name="url"
 					placeholder="https://discohook.org/?data=... OR https://share.discohook.app/go/..."
 					className="w-full h-9 px-2 rounded border border-black bg-coolGray-900 transition placeholder-coolGray-500 placeholder-shown:italic focus:ring-2 ring-blue-500"
+					style={{ fontVariantLigatures: "none" }}
 					onChange={handleInput}
 				/>
 			</label>
@@ -153,10 +157,10 @@ function App() {
 			{shareLink && (
 				<>
 					<p className="w-full">
-						This is a shortened url, but its destination could not be found
-						(it might have expired or been copied incorrectly). In case it
-						actually is valid, visit it and wait for it to redirect you. Then
-						copy the long URL it leads to and paste it above.
+						This is a shortened url, but its destination could not be found (it
+						might have expired or been copied incorrectly). In case it actually
+						is valid, visit it and wait for it to redirect you. Then copy the
+						long URL it leads to and paste it above.
 					</p>
 					<p className="w-full">
 						It should start with either{" "}
