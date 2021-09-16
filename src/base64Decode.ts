@@ -9,7 +9,7 @@ export const base64Decode = (urlSafeBase64: string) => {
 			.join("")
 
 		return decodeURIComponent(encoded)
-	} catch (e: any) {
-		return e.message
+	} catch (e: unknown) {
+		return String(e)
 	}
 }
