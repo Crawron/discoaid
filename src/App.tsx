@@ -35,6 +35,20 @@ function App() {
 	const [url, setUrl] = useState("")
 	const [shareLink, setShareLink] = useState(false)
 
+	const getOriginalUrl = async (url: string) => {
+		// the location header isn't exposed to the fetch API so we just "proxy" getting it here
+		const response = await fetch('https://discoshorter-proxy-api.shay.cat/get-share-redirect', {
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({ url: url })
+		})
+		if (!response.ok) {
+			return ""
+		}
+		const data = await response.json()
+		return data.url || ""
+	}
+
 	const handleInput = async (ev: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = ev.target
 
@@ -46,8 +60,9 @@ function App() {
 			setUrl(value)
 			setShareLink(false)
 		} else if (shareRegex.test(value)) {
-			setUrl("")
-			setShareLink(true)
+			const originalUrl = await getOriginalUrl(value)
+			setUrl(originalUrl)
+			setShareLink(!originalUrl)
 		} else {
 			setUrl("")
 			setShareLink(false)
@@ -110,7 +125,7 @@ function App() {
 				<input
 					type="text"
 					name="url"
-					placeholder="https://discohook.org/?data=..."
+					placeholder="https://discohook.org/?data=... OR https://share.discohook.app/go/..."
 					className="w-full h-9 px-2 rounded border border-black bg-coolGray-900 transition placeholder-coolGray-500 placeholder-shown:italic focus:ring-2 ring-blue-500"
 					onChange={handleInput}
 				/>
@@ -138,8 +153,10 @@ function App() {
 			{shareLink && (
 				<>
 					<p className="w-full">
-						This is a shortened url, visit it and wait for it to redirect you.
-						Then copy the long URL it leads to and paste it above.
+						This is a shortened url, but its destination could not be found
+						(it might have expired or been copied incorrectly). In case it
+						actually is valid, visit it and wait for it to redirect you. Then
+						copy the long URL it leads to and paste it above.
 					</p>
 					<p className="w-full">
 						It should start with either{" "}
